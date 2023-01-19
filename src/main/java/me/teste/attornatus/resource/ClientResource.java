@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import me.teste.attornatus.models.Client;
 import me.teste.attornatus.repository.ClientRepository;
 import me.teste.attornatus.service.ClientService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,5 +29,18 @@ public class ClientResource {
     @PostMapping()
     public Client newClient(@RequestBody Client client){
         return clientRepository.save(client);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Client> editClient (@PathVariable("id") Long id,
+                             @RequestBody Client client){
+        return clientRepository.findById(id)
+                .map(record ->{
+                    record.setName(client.getName());
+                    record.setAddress(client.getAddress());
+                    record.setBirth_date(client.getBirth_date());
+                    Client updated = clientRepository.save(record);
+                    return ResponseEntity.ok().body(updated);
+                }).orElse(ResponseEntity.notFound().build());
     }
 }
