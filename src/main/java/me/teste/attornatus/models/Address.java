@@ -18,4 +18,5 @@ public class Address {
     private String address;
     private Integer number;
     private String city;
+    private boolean main;
 }
