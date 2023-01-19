@@ -13,7 +13,7 @@ public class ClientServiceImpl implements ClientService{
     public Client getClient(Long id) {
         return clientRepository.findById(id).orElseThrow(
                 ()->{
-                    throw new RuntimeException("Esse cliente não está cadastrado em nosso banco de dados.");
+                    throw new RuntimeException("Cliente não encontrado.");
                 }
         );
     }
