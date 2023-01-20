@@ -17,7 +17,7 @@ public class ClientResource {
     private final ClientRepository clientRepository;
 
     @GetMapping("/{id}")
-    public Client getSacola(@PathVariable("id") Long id){
+    public Client getClient(@PathVariable("id") Long id){
         return clientService.getClient(id);
     }
 
@@ -37,7 +37,6 @@ public class ClientResource {
         return clientRepository.findById(id)
                 .map(record ->{
                     record.setName(client.getName());
-                    record.setAddress(client.getAddress());
                     record.setBirth_date(client.getBirth_date());
                     Client updated = clientRepository.save(record);
                     return ResponseEntity.ok().body(updated);
