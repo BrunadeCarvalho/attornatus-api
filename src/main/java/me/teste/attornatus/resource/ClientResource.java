@@ -33,10 +33,11 @@ public class ClientResource {
 
     @PutMapping("/{id}")
     public ResponseEntity<Client> editClient (@PathVariable("id") Long id,
-                             @RequestBody Client client){
+                                              @RequestBody Client client){
         return clientRepository.findById(id)
                 .map(record ->{
                     record.setName(client.getName());
+                    record.setAddress(client.getAddress());
                     record.setBirth_date(client.getBirth_date());
                     Client updated = clientRepository.save(record);
                     return ResponseEntity.ok().body(updated);

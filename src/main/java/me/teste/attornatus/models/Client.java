@@ -24,4 +24,8 @@ public class Client {
     private String name;
     private String birth_date;
 
+    @Embedded
+    private Address address;
+
+
 }
